@@ -16,9 +16,7 @@ client.registry
     ['misc', 'misc but important commands']
 	])
 	.registerDefaultGroups()
-	.registerDefaultCommands({
-    help: false
-  })
+	.registerDefaultCommands()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
   client.once('ready', () => {

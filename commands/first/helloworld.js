@@ -7,11 +7,15 @@ module.exports = class HelloWorld extends Command{
       aliases: ['hello', 'hi'],
       group: 'first',
       memberName: 'helloworld',
-      description: 'Respond Hello World'
+      description: 'Respond Hello World only in the general channel'
     });
   };
 
   async run(message){
+    const channel = message.channel;
+    if(channel.name !== 'general'){
+      return await message.say('This is the wrong channel')
+    }
     return await message.say('Hello World');
   }
 

@@ -3,11 +3,12 @@ const { Command } = require('discord.js-commando');
 module.exports = class HelpCommand extends Command{
   constructor(client){
     super(client, {
-      name: 'help',
+      name: 'helpme',
       group: 'misc',
-      aliases: ['commands'],
+      aliases: ['mycommands', 'mycommandlists'],
       memberName: 'help',
       description: 'get the list of commands',
+      examples: ['```.help``` and a help message would be sent to your dm']
     });
   }
 
