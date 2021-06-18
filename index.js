@@ -13,14 +13,17 @@ client.registry
 	.registerGroups([
 		['first', 'Your First Command Group'],
 		['second', 'Your Second Command Group'],
+    ['misc', 'misc but important commands']
 	])
 	.registerDefaultGroups()
-	.registerDefaultCommands()
+	.registerDefaultCommands({
+    help: false
+  })
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
   client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    client.user.setActivity('with Commando');
+    client.user.setActivity('getting built');
   });
   
   client.on('error', console.error);
