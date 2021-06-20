@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const db = require('../../db/db.js');
 
 module.exports = class log extends Command {
   constructor(client){
@@ -17,6 +18,7 @@ module.exports = class log extends Command {
   }
 
   async run(message, { text }){
-    return await message.say(`${text} has been logged`);
+    db.newDoc({'userId': message.author.id, 'commitLog': text});
+    return await message.reply(`${text} has been logged.`);
   }
 };
