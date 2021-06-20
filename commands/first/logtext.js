@@ -21,9 +21,9 @@ module.exports = class log extends Command {
     let isThere = await db.findDoc({'userId': message.author.id});
     console.log(isThere);
     if(isThere){
-      return await message.reply('You already have a commitment. \nDid you mean to update it? Use \`.update\` to update it. \nOr you can use \`.seelogs\` to see your current log.');
+      return await message.direct('You already have a commitment. \nDid you mean to update it? Use \`.update\` to update it. \nOr you can use \`.seelogs\` to see your current log.');
     }
     db.newDoc({'userId': message.author.id, 'commitLog': text, 'remindme': 'never'});
-    return await message.reply(`${text} has been logged. Now use \`.remindme daily/weekly/bi-weekly/monthly\` to set the reminder.`);
+    return await message.direct(`${text} has been logged. Now use \`.remindme daily/weekly/bi-weekly/monthly\` to set the reminder.`);
   }
 };

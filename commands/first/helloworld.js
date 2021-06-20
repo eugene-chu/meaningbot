@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const { isCorrectChannel } = require('../../helpfunc.js');
 
 module.exports = class HelloWorld extends Command{
   constructor(client){
@@ -12,10 +13,7 @@ module.exports = class HelloWorld extends Command{
   };
 
   async run(message){
-    const channel = message.channel;
-    if(channel.name !== 'general'){
-      return await message.say('This is the wrong channel')
-    }
+    if(!isCorrectChannel(message)) return await message.say('This is the wrong channel');
     return await message.say('Hello World');
   }
 
