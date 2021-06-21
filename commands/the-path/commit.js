@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const db = require('../../db/db');
+const db = require('../../db/db.js');
 
 module.exports = class Commit extends Command{
   constructor(client){
