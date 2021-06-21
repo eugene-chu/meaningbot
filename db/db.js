@@ -15,9 +15,8 @@ client.connect(()=>{
 
 module.exports = {
   findDoc: async function(id){
-    doc = await col.findOne(id);
     try{
-      return doc;
+      return await col.find(id);
     }catch(err){
       console.log(err);
       return null;
@@ -25,7 +24,7 @@ module.exports = {
   },
   newDoc: async function(info){
     try{
-      col.insertOne(info);
+      return await col.insertOne(info);
     }catch(err){
       console.log(err);
       return null;
@@ -33,7 +32,7 @@ module.exports = {
   },
   updateLog: async function(info){
     try{
-      col.updateOne({'id': info.id}, {'log': info.log});
+      return await col.updateOne({'userId': info.id}, { $set: {'commitLog': info.log} });
     }catch(err){
       console.log(err);
       return null;
