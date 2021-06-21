@@ -7,7 +7,7 @@ module.exports = class log extends Command {
       name: 'log',
       group: 'first',
       memberName: 'log',
-      description: 'logs the message you type to the discord bot. Use command `.readlogs` to read it',
+      description: 'logs the message you type to the discord bot. Use command `.seelogs` to read it. Use command `.update` to update it.',
       examples: ['`.log hello world`: "Hello World" will be logged.'],
       args: [{
         key: 'text',
@@ -19,7 +19,6 @@ module.exports = class log extends Command {
 
   async run(message, { text }){
     let isThere = await db.findDoc({'userId': message.author.id});
-    console.log(isThere);
     if(isThere){
       return await message.direct('You already have a commitment. \nDid you mean to update it? Use \`.update\` to update it. \nOr you can use \`.seelogs\` to see your current log.');
     }
