@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const { DMChannel } = require('discord.js');
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 
