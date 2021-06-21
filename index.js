@@ -8,6 +8,11 @@ const client = new CommandoClient({
 	owner: ['184136353812840449','294705970511085570','379336215205380106','456947461714345984']
 });
 
+client.dispatcher.addInhibitor((message) => {
+  if(message.channel.id !== '848008771397353505')
+  return {reason: 'Wrong Channel',
+  response: message.reply('This is the wrong channel. Please use this command in <#848008771397353505>')}});
+
 client.registry
 	.registerDefaultTypes()
 	.registerGroups([

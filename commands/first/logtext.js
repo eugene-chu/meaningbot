@@ -12,7 +12,7 @@ module.exports = class log extends Command {
       args: [{
         key: 'text',
         prompt: 'What will be your commitment?',
-        type: 'string'
+        type: 'string',
       }]
     });
   }
