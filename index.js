@@ -10,7 +10,7 @@ const client = new CommandoClient({
 
 client.dispatcher.addInhibitor((message) => {
   if(!(message.channel.type === 'dm' && message.command.name === 'help')){
-    if(message.channel.id !== '479754367419940883'){
+    if(message.channel.id !== '848008771397353505'){
       return {reason: 'Wrong Channel',
       response: message.reply('This is the wrong channel to use the commands. Please use the commands in <#848008771397353505>')};    
     }
