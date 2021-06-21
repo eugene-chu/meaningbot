@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 
@@ -6,7 +8,12 @@ const client = new CommandoClient({
 	owner: ['184136353812840449','294705970511085570','379336215205380106','456947461714345984']
 });
 
-client.registry
+client.dispatcher.addInhibitor((message) => {
+  if(message.channel.id !== '848008771397353505' && message.command.name !== 'help')
+  return {reason: 'Wrong Channel',
+  response: message.reply('This is the wrong channel to use the commands. Please use the commands in <#848008771397353505>')}});
+
+  client.registry
 	.registerDefaultTypes()
 	.registerGroups([
 		['the-path', 'The-Path commands to help you get after it.'],
@@ -18,7 +25,7 @@ client.registry
 
   client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    client.user.setActivity('getting built');
+    client.user.setActivity('Playing Around');
   });
   
   client.on('error', console.error);
