@@ -16,6 +16,7 @@ module.exports = class GetSome extends Command {
       'Who Gonna Carry The Boat!?!',
       'Roger That',
       'You gotta get after it!',
+      'Discipline Equals Freedom!'
     ]
   }
 
