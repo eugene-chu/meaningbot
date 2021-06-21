@@ -16,7 +16,7 @@ client.connect(()=>{
 module.exports = {
   findDoc: async function(id){
     try{
-      return await col.find(id);
+      return await col.findOne(id);
     }catch(err){
       console.log(err);
       return null;
