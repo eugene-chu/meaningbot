@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const { DMChannel } = require('discord.js');
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 
@@ -9,9 +10,14 @@ const client = new CommandoClient({
 });
 
 client.dispatcher.addInhibitor((message) => {
-  if(message.channel.id !== '848008771397353505' && message.command.name !== 'help')
-  return {reason: 'Wrong Channel',
-  response: message.reply('This is the wrong channel to use the commands. Please use the commands in <#848008771397353505>')}});
+  if(!(message.command.name === 'help' && message.channel.type === 'dm')){
+    if(message.channel.id !== '848008771397353505'){
+        return {reason: 'Wrong Channel',
+        response: message.reply('This is the wrong channel to use the commands. Please use the commands in <#848008771397353505>')}
+    }
+
+  }
+});
 
 client.registry
 	.registerDefaultTypes()
