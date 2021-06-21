@@ -15,6 +15,11 @@ client.connect(() => {
 module.exports = {
   // Look of the discord user's unqiue id in the database.
   findUser: async function(id) {
+    /** id should be the following shape:
+     * {
+     *  'userId: <user id, using their discord's unique id>
+     * }
+     */
     try{
       return await col.findOne(id)
     } catch (err){
@@ -26,7 +31,7 @@ module.exports = {
   newCommit: async function(info) {
     /** Info should be the following shape:
      * {
-     *    id: <user id, using the discord's unique id>
+     *    userId: <user id, using their discord's unique id>
      *    commit1: <commitment message>
      *    commit2: <commitment message>
      *    commit3: <commitment message>
@@ -34,6 +39,7 @@ module.exports = {
      *    commit5: <commitment message>
      *    remindme: never
      * }
+     * commit2-5 are optional, and is under-development.
      */
     try{
       return await col.insertOne(info);
@@ -46,13 +52,14 @@ module.exports = {
   updateCommit: async function(info){
     /** Info should be the following shape:
      * {
-     *    id: <user id, using the discord's unique id>
+     *    id: <user id, using their discord's unique id>
      *    commit1: <commitment message>
      *    commit2: <commitment message>
      *    commit3: <commitment message>
      *    commit4: <commitment message>
      *    commit5: <commitment message>
      * }
+     * commit2-5 is under-development
      */
     try{
       return await col.updateOne({'userId': info.id},
@@ -66,7 +73,7 @@ module.exports = {
   updateReminder: async function(info){
     /** Info should be the following shape:
      * {
-     *    id: <user id, using the discord's unique id>
+     *    id: <user id, using their discord's unique id>
      *    reminder: <string, one of the remindme option>
      * }
      */
