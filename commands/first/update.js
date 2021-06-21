@@ -19,7 +19,7 @@ module.exports = class update extends Command{
 
   async run(message, { text }){
     let isThere = await db.findDoc({'userId': message.author.id});
-    if(!isThere) return await message.direct('You do not have any commit log yet. Did you mean to use `.log` to log your first message?');
+    if(!isThere) return await message.reply('You do not have any commit log yet. Did you mean to use `.log` to log your first message?');
     let responseMsg = `Previous log is \`${isThere.commitLog}\`, log updated to \`${text}\``;
 
     let res = await db.updateLog({id: message.author.id, log: text});
