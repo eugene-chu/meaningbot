@@ -10,7 +10,7 @@ module.exports = class getsome extends Command {
       examples: ['`.getsome`: GET AFTER IT']
     });
 
-    this.quotes = [
+    this.quoteslist = [
       'Get After It, Bucko',
       'Get Some',
       'Who Gonna Carry The Boat!?!',
@@ -20,7 +20,7 @@ module.exports = class getsome extends Command {
   }
 
   async run(message){
-    let randQuote = this.quotes[Math.floor(Math.random*this.quotes.length)];
-    return await message.reply(randQuote);
+    let randQuote = this.quoteslist[Math.floor(Math.random*this.quoteslist.length)];
+    return await message.say(randQuote);
   }
 }
