@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando');
 const db = require('../../db/db.js');
-
-const { userList } = require('../../index.js');
+const { userList } = require('../../db/userList.js');
 
 module.exports = class log extends Command {
   constructor(client) {
