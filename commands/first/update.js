@@ -1,9 +1,9 @@
 const { Command } = require('discord.js-commando');
 const db = require('../../db/db.js');
 
-module.exports = class update extends Command{
-  constructor(client){
-    super(client,{
+module.exports = class update extends Command {
+  constructor(client) {
+    super(client, {
       name: 'update',
       group: 'first',
       memberName: 'update',
@@ -12,20 +12,20 @@ module.exports = class update extends Command{
       args: [{
         key: 'text',
         prompt: 'What is your new commitment?',
-        type: 'string'
-      }]
+        type: 'string',
+      }],
     });
   }
 
-  async run(message, { text }){
-    let isThere = await db.findDoc({'userId': message.author.id});
+  async run(message, { text }) {
+    const isThere = await db.findDoc({ 'userId': message.author.id });
     if(!isThere) return await message.reply('You do not have any commit log yet. Did you mean to use `.log` to log your first message?');
-    let responseMsg = `Previous log is \`${isThere.commitLog}\`, log updated to \`${text}\``;
+    const responseMsg = `Previous log is \`${isThere.commitLog}\`, log updated to \`${text}\``;
 
-    let res = await db.updateLog({id: message.author.id, log: text});
-    if(res === null){
-      return await message.direct(`Something went wrong updating the log in the database.`);
+    const res = await db.updateLog({ id: message.author.id, log: text });
+    if(res === null) {
+      return await message.direct('Something went wrong updating the log in the database.');
     }
     return await message.direct(responseMsg);
   }
-}
+};
