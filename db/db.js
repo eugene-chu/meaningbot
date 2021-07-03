@@ -23,6 +23,15 @@ module.exports = {
 			return null;
 		}
 	},
+  countDoc: async function(args = {}) {
+    try{
+      return await col.countDocuments(args);
+    }
+    catch(err) {
+      console.log(err);
+      return null;
+    }
+  },
 	newDoc: async function(info) {
 		try{
 			return await col.insertOne(info);
