@@ -3,6 +3,7 @@ require('dotenv').config();
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { userList } = require('./db/userList.js');
+const db = require('./db/db');
 
 const client = new CommandoClient({
 	commandPrefix: '.',
@@ -43,9 +44,16 @@ client.on('presenceUpdate', (pres1, pres2) => {
 	console.log(`agr2: ${JSON.stringify(pres2)}`);
 });
 
-client.setInterval(() => {
-  console.log(`This is the current userList: ${[...userList]}`);
-  console.log(`The current list size is ${userList.size}`);
-}, 10 * 1000);
+// client.setInterval(async () => {
+//   // const totCount = await db.countDoc();
+//   // console.log(totCount);
+//   // if (totCount === 0) {
+//   //   console.log('nothing to see here');
+//   //   return;
+//   // }
+//   // console.log(`This is the current userList: ${[...userList]}`);
+//   // console.log(`The current list size is ${userList.size}`);
+//   console.log(new Date() > (new Date().getTime() - (24 * 60 * 60 * 1000)));
+// }, 10 * 1000);
 
 client.login(process.env.BOTTOKEN);
