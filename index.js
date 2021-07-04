@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
+const db = require('./db/db.js');
 
 const client = new CommandoClient({
 	commandPrefix: '.',
@@ -33,5 +34,18 @@ client.dispatcher.addInhibitor((message) => {
   });
   
   client.on('error', console.error);
+
+  client.on('presenceUpdate', async (oldStatus, newStatus) => {
+    if(oldStatus.status === 'offline'){
+      // Will use to check if user have saved a commit
+      const isThere = await db.findUser({ 'userId': oldStatus.userID});
+      // Checking what's in the presece.user object
+      console.log(oldStatus.user);
+      
+      // this is how we would create a dm channel with the user to send reminder
+      const dm = await oldStatus.user.createDM();
+      dm.send('Welcome back online');
+    }
+  });
 
   client.login(process.env.BOTTOKEN);
