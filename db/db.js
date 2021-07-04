@@ -17,13 +17,8 @@ client.connect(() => {
 module.exports = {
   // Look of the discord user's unqiue id in the database.
   findUser: async function(id) {
-    /** id should be the following shape:
-     * {
-     *  'userId: <user id, using their discord's unique id>
-     * }
-     */
     try{
-      return await col.findOne(id)
+      return await col.findOne({'userId': id})
     } catch (err){
       console.log(err);
       return null;

@@ -18,7 +18,7 @@ module.exports = class Update extends Command {
   }
 
   async run(message, { text }){
-    let isThere = await db.findUser({'userId': message.author.id});
+    let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
 
     let res = await db.updateCommit({'id': message.author.id, 'commit1': text});

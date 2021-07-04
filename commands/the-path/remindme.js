@@ -20,7 +20,7 @@ module.exports = class RemindMe extends Command {
   }
 
   async run(message, { frequency }){
-    let isThere = await db.findUser({'userId': message.author.id});
+    let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
 
     let res = await db.updateReminder({'id': message.author.id, 'reminder': frequency});

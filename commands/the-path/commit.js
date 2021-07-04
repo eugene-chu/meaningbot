@@ -18,7 +18,7 @@ module.exports = class Commit extends Command{
   }
 
   async run(message, { text }){
-    let isThere = await db.findUser({'userId': message.author.id});
+    let isThere = await db.findUser(message.author.id);
     if(isThere) return await message.direct('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
 
     let res = await db.newCommit({'userId': message.author.id, 'commit1': text, 'remindme': 'never'});
