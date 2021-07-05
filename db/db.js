@@ -25,49 +25,41 @@ module.exports = {
     }
   },
   // Add a new commitment to the database.
-  newCommit: async function(info) {
+  newCommit: async function(id, commit) {
     /** Info should be the following shape:
      * {
      *    userId: <user id, using their discord's unique id>
-     *    commit1: <commitment message>
-     *    commit2: <commitment message>
-     *    commit3: <commitment message>
-     *    commit4: <commitment message>
-     *    commit5: <commitment message>
+     *    commit: <commitment message>
      *    remindme: never
      * }
-     * commit2-5 are optional, and is under-development.
+     * Working on allowing for more than 1 commit message
      */
     try{
-      return await col.insertOne(info);
+      return await col.insertOne({'userId': id, 'commit': commit, 'remindme': never});
     } catch (err){
       console.log(err);
       return null;
     }
   },
   // Update a commitment message
-  updateCommit: async function(info){
+  updateCommit: async function(id, commit){
     /** Info should be the following shape:
      * {
      *    id: <user id, using their discord's unique id>
      *    commit1: <commitment message>
-     *    commit2: <commitment message>
-     *    commit3: <commitment message>
-     *    commit4: <commitment message>
-     *    commit5: <commitment message>
      * }
      * commit2-5 is under-development
      */
     try{
-      return await col.updateOne({'userId': info.id},
-      { $set: {'commit1': info.commit1} });
+      return await col.updateOne({'userId': id},
+      { $set: {'commit1': commit} });
     } catch (err){
       console.log(err);
       return null;
     }
   },
   // Update the reminder message
-  updateReminder: async function(info){
+  updateReminder: async function(id, reminder){
     /** Info should be the following shape:
      * {
      *    id: <user id, using their discord's unique id>
@@ -75,8 +67,8 @@ module.exports = {
      * }
      */
     try{
-      return await col.updateOne({'userId': info.id},
-      { $set: {'reminder': info.reminder } });
+      return await col.updateOne({'userId': id},
+      { $set: {'reminder': reminder } });
     } catch (err){
       console.log(err);
       return null;
