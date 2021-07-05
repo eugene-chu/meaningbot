@@ -7,23 +7,25 @@ module.exports = class RemindMe extends Command {
       name: 'remindme',
       group: 'the-path',
       memberName: 'remindme',
-      description: 'Set a reminder interval. Meaningbot will DM you, reminding you to get after it!',
-      examples: ['`.remindme daily`: Gets a DM daily to remind you to get after it!',
-                 '`.remindme weekly`: Get a DM weekly to remind you to get after it!',
-                 '`.remindme never`: Stop getting DM reminders. But Meaningbot will still have your current commitments.'],
+      description: 'Toggle the remindme feature. Meaningbot will DM you daily, reminding you to get after it!',
+      examples: ['`.remindme`: Let you know if you have it on or off',
+                 '`.remindme on`: Get a daily DM to remind you to get after it!',
+                 '`.remindme off`: Stops the daily DM reminders. But Meaningbot will still have your current commitments.'],
       args: [{
-        key: 'frequency',
-        prompt: 'How often do you want to be reminded?',
-        type: 'string'
+        key: 'toggle',
+        prompt: 'Toggle your remindme?',
+        type: 'string',
+        oneOf: ['on', 'off'],
+        default: '',
       }]
     })
   }
 
-  async run(message, { frequency }){
+  async run(message, { toggle }){
     let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
 
-    let res = await db.updateReminder(message.author.id, frequency);
+    let res = await db.updateReminder(message.author.id, toggle);
     if(res === null) return await message.direct('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
     let resMessage;
     frequency === 'never' ? resMessage = `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start is up again with \`.remindme\``
