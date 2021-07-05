@@ -23,7 +23,7 @@ module.exports = class RemindMe extends Command {
     let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
 
-    let res = await db.updateReminder({'id': message.author.id, 'reminder': frequency});
+    let res = await db.updateReminder(message.author.id, frequency);
     if(res === null) return await message.direct('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
     let resMessage;
     frequency === 'never' ? resMessage = `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start is up again with \`.remindme\``

@@ -18,6 +18,6 @@ module.exports = class Commitments extends Command{
     let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
     
-    return await message.reply(`Your current commitments are: ${isThere.commit1}`);
+    return await message.reply(`Your current commitment is: ${isThere.commit}`);
   }
 }
