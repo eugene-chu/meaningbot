@@ -19,7 +19,7 @@ module.exports = class log extends Command {
   }
 
   async run(message, { text }) {
-    const isThere = await db.findDoc({ 'userId': message.author.id });
+    const isThere = await db.findDoc(message.author.id);
     if(isThere) return await message.direct('You already have a commitment. \nDid you mean to update it? Use `.update` to update it. \nOr you can use `.seelogs` to see your current log.');
 
     userList.add(message.author.id);
