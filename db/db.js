@@ -50,4 +50,13 @@ module.exports = {
 			return null;
 		}
 	},
+  updateRemind: async function(info) {
+    try{
+      return await col.updateOne({ 'userId': info.id }, { $set: { 'remindme': info.toggle } });
+    }
+    catch(err) {
+      console.log(err);
+      return null;
+    }
+  },
 };
