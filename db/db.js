@@ -35,7 +35,7 @@ module.exports = {
      * Working on allowing for more than 1 commit message
      */
     try{
-      return await col.insertOne({'userId': id, 'commit': commit, 'remindme': 'off'});
+      return await col.insertOne({'userId': id, 'commit': commit, 'remindme': never});
     } catch (err){
       console.log(err);
       return null;
@@ -43,29 +43,28 @@ module.exports = {
   },
   // Update a commitment message
   updateCommit: async function(id, commit){
-    /** Param should be the following shape:
+    /** Params should be the following:
      *    id: <user id, using their discord's unique id>
      *    commit: <commitment message>
-     * more commit message is under-development
+     * commit2-5 is under-development
      */
     try{
       return await col.updateOne({'userId': id},
-      { $set: {'commit': commit} });
+      { $set: {'commit1': commit} });
     } catch (err){
       console.log(err);
       return null;
     }
   },
   // Update the reminder message
-  updateRemindme: async function(id, reminder){
-    /** Param should be the following:
-     *  id: <user id, using their discord's unique id>
-     *  reminder: <string, one of the remindme option>
-     * 
+  updateReminder: async function(id, reminder){
+    /** Params should be the following shape:
+     *    id: <user id, using their discord's unique id>
+     *    reminder: <string, one of the remindme option>
      */
     try{
       return await col.updateOne({'userId': id},
-      { $set: {'remindme': reminder } });
+      { $set: {'reminder': reminder } });
     } catch (err){
       console.log(err);
       return null;
