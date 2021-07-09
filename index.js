@@ -3,6 +3,7 @@ require('dotenv').config();
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const db = require('./db/db.js');
+const { sendReminder } = require('./helpers.js');
 
 const client = new CommandoClient({
 	commandPrefix: '.',
@@ -41,12 +42,14 @@ client.dispatcher.addInhibitor((message) => {
       const isThere = await db.findUser(oldStatus.userID);
       if(isThere){
         
-        // Checking what's in the presece.user object
-        console.log(oldStatus.user);
+        // // Checking what's in the presece.user object
+        // console.log(oldStatus.user);
   
-        // this is how we would create a dm channel with the user to send reminder
-        const dm = await oldStatus.user.createDM();
-        dm.send('Welcome back online');
+        // // this is how we would create a dm channel with the user to send reminder
+        // const dm = await oldStatus.user.createDM();
+        // dm.send('Welcome back online');
+
+        sendReminder(oldStatus.user, isThere);
       }
     }
   });
