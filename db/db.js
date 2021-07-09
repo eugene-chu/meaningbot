@@ -25,17 +25,21 @@ module.exports = {
     }
   },
   // Add a new commitment to the database.
-  newCommit: async function(id, commit) {
-    /** Info should be the following shape:
-     * {
+  newCommit: async function(id, commit, time) {
+    /** Param should be the following:
      *    userId: <user id, using their discord's unique id>
      *    commit: <commitment message>
-     *    remindme: never
-     * }
+     *    time: <the time when the commit command was run>
+     * 
      * Working on allowing for more than 1 commit message
      */
     try{
-      return await col.insertOne({'userId': id, 'commit': commit, 'remindme': never});
+      return await col.insertOne({
+        'userId': id,
+        'commit': commit,
+        'remindMe': 'never',
+        'commitTime': time,
+        'lastDMTime': time });
     } catch (err){
       console.log(err);
       return null;
@@ -50,22 +54,36 @@ module.exports = {
      */
     try{
       return await col.updateOne({'userId': id},
-      { $set: {'commit1': commit} });
+      { $set: { 'commit': commit } });
     } catch (err){
       console.log(err);
       return null;
     }
   },
-  // Update the reminder message
-  updateReminder: async function(id, reminder){
-    /** Params should be the following shape:
+  // Update the reminder frequency
+  updateFrequency: async function(id, frequency, time){
+    /** Params should be the following:
      *    id: <user id, using their discord's unique id>
-     *    reminder: <string, one of the remindme option>
+     *    frequency: <string, one of the remindme option>
+     *    time: <the time when the reminder frequency was updated>
      */
     try{
-      return await col.updateOne({'userId': id},
-      { $set: {'reminder': reminder } });
+        return await col.updateOne({ 'userId': id },
+        { $set: { 'remindMe': frequency, 'commitTime': time, 'lastDMTime': time }})
     } catch (err){
+      console.log(err);
+      return null;
+    }
+  },
+  updateDMTime: async function(id, time){
+    /** Params should be the following:
+     *    id: <user id, using their discord's unique id>
+     *    time: <the time when the last DM reminder was sent>
+     */
+    try{
+      return await col.updateOne({ 'userId': id },
+      { $set: { 'lastDMTime': time }})
+    }catch (err){
       console.log(err);
       return null;
     }
