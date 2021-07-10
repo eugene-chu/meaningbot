@@ -14,7 +14,8 @@ module.exports = class RemindMe extends Command {
       args: [{
         key: 'frequency',
         prompt: 'How often do you want to be reminded?',
-        type: 'string'
+        type: 'string',
+        oneOf: ['never', 'daily', 'weekly', 'monthly'],
       }]
     })
   }
