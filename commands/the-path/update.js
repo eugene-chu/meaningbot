@@ -23,6 +23,6 @@ module.exports = class Update extends Command {
 
     let res = await db.updateCommit(message.author.id, text);
     if(res === null) return await message.direct('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
-    return await message.direct(`Your commitment has been updated! Commitment changed from ${isThere.commit1} to ${text}`);
+    return await message.direct(`Your commitment has been updated! Commitment changed from ${isThere.commit} to ${text}`);
   }
 };
