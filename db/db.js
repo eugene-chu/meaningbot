@@ -29,7 +29,7 @@ module.exports = {
     /** Param should be the following:
      *    userId: <user id, using their discord's unique id>
      *    commit: <commitment message>
-     *    time: <the time when the commit command was run>
+     *    time: <the time (JS Date object) when the commit command was run>
      * 
      * Working on allowing for more than 1 commit message
      */
@@ -61,11 +61,11 @@ module.exports = {
     }
   },
   // Update the reminder frequency
-  updateFrequency: async function(id, frequency, time){
+  updateRemindMe: async function(id, frequency, time){
     /** Params should be the following:
      *    id: <user id, using their discord's unique id>
      *    frequency: <string, one of the remindme option>
-     *    time: <the time when the reminder frequency was updated>
+     *    time: <the time (JS Date object) when the reminder frequency was updated>
      */
     try{
         return await col.updateOne({ 'userId': id },
@@ -78,7 +78,7 @@ module.exports = {
   updateDMTime: async function(id, time){
     /** Params should be the following:
      *    id: <user id, using their discord's unique id>
-     *    time: <the time when the last DM reminder was sent>
+     *    time: <the time (JS Date object) when the last DM reminder was sent>
      */
     try{
       return await col.updateOne({ 'userId': id },
