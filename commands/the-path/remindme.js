@@ -21,14 +21,16 @@ module.exports = class RemindMe extends Command {
   }
 
   async run(message, { frequency }){
-    let isThere = await db.findUser({'userId': message.author.id});
+    let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.direct('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
 
-    let res = await db.updateReminder({'id': message.author.id, 'reminder': frequency});
+    if(frequency === isThere.remindMe) return await message.direct(`Your RemindMe is already set to ${frequency}. Did you mean to change it to one of the other options?`);
+
+    let res = await db.updateRemindMe(message.author.id, frequency, new Date());
     if(res === null) return await message.direct('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
-    let resMessage;
-    frequency === 'never' ? resMessage = `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start is up again with \`.remindme\``
-                          : resMessage = `You will get ${frequency} DM reminding you to get after it!`
+    const resMessage = ((frequency === 'never')
+    ? `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start is up again with \`.remindme\``
+    : `You will get ${frequency} DM reminding you to get after it!`);
     return await message.direct(resMessage);
   }
 }
