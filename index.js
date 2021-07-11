@@ -3,7 +3,7 @@ require('dotenv').config();
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const db = require('./db/db.js');
-const { sendReminder } = require('./helpers.js');
+const { checkInterval } = require('./helpers.js');
 
 const client = new CommandoClient({
 	commandPrefix: '.',
@@ -31,27 +31,30 @@ client.dispatcher.addInhibitor((message) => {
 
   client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    client.user.setActivity('Playing Around');
+    client.user.setActivity('Reminding you to Get After It!');
   });
   
   client.on('error', console.error);
 
   client.on('presenceUpdate', async (oldStatus, newStatus) => {
-    if(oldStatus.status === 'offline'){
-      // Will use to check if user have saved a commit
-      const isThere = await db.findUser(oldStatus.userID);
-      if(isThere){
-        
-        // // Checking what's in the presece.user object
-        // console.log(oldStatus.user);
-  
-        // // this is how we would create a dm channel with the user to send reminder
-        // const dm = await oldStatus.user.createDM();
-        // dm.send('Welcome back online');
-
-        sendReminder(oldStatus.user, isThere);
+    const isThere = await db.findUser(newStatus.userID);
+    if(isThere){
+      if(typeof oldStatus === 'undefined' || oldStatus.status === 'offline'){
+        await db.updateStatus(newStatus.userID, 'online');
+        await checkInterval(isThere, newStatus.user);
+      } else if (newStatus.status === 'offline'){
+        await db.updateStatus(newStatus.userID, newStatus.status);
       }
     }
   });
+
+  client.setInterval(async () => {
+    const allCommits = await db.findAll();
+    allCommits.forEach(async commitment => {
+      if(commitment.status === 'online')
+        let user = await client.users.cache.get(commitment.userId);
+        await checkInterval(commitment, user);
+    });
+  }, (1000 * 60));
 
   client.login(process.env.BOTTOKEN);
