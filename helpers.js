@@ -10,7 +10,8 @@ checkTime = async (now, ocTime, dbInfo, user) => {
       await this.sendReminder(user, dbInfo);
     }
   }
-},
+}
+
 sendReminder = async (user, dbInfo) => {
   const dm = await user.createDM();
 
