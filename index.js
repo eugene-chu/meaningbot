@@ -41,7 +41,7 @@ client.dispatcher.addInhibitor((message) => {
     if(isThere){
       if(typeof oldStatus === 'undefined' || oldStatus.status === 'offline'){
         await db.updateStatus(newStatus.userID, 'online');
-        await checkInterval(isThere, newStatus.user);
+        if(isThere.remindMe !== 'never') await checkInterval(isThere, newStatus.user);
       } else if (newStatus.status === 'offline'){
         await db.updateStatus(newStatus.userID, newStatus.status);
       }
@@ -51,7 +51,7 @@ client.dispatcher.addInhibitor((message) => {
   client.setInterval(async () => {
     const allCommits = await db.findAll();
     allCommits.forEach(async commitment => {
-      if(commitment.status === 'online')
+      if(commitment.remindMe !== 'never' && commitment.status === 'online')
         let user = await client.users.cache.get(commitment.userId);
         await checkInterval(commitment, user);
     });
