@@ -1,6 +1,28 @@
 const db = require('./db/db.js');
 const { DateTime } = require('luxon');
 
+
+checkTime = async (now, ocTime, dbInfo, user) => {
+  if(now.hour > ocTime.hour){
+    await this.sendReminder(user, dbInfo);
+  } else if(now.hour === ocTime.hour){
+    if(now.minute >= ocTime.minute){
+      await this.sendReminder(user, dbInfo);
+    }
+  }
+},
+sendReminder = async (user, dbInfo) => {
+  const dm = await user.createDM();
+
+  await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
+  let res = await db.updateDMTime(user.id, new Date());
+  if(res === null){
+    console.error('Error occured logging updated time');
+    await dm.send('There was issue trying to updating: `the time`. Let Alex, or one of the bot masters know of this issue ASAP');
+  }
+  return;
+}
+
 module.exports = {
   checkInterval: async (dbInfo, user) => {
     const now = DateTime.now();
@@ -21,24 +43,4 @@ module.exports = {
       return await this.checkTime(now, ocTime, dbInfo, user);
     } return;
   },
-  checkTime: async (now, ocTime, dbInfo, user) => {
-    if(now.hour > ocTime.hour){
-      this.sendReminder(user, dbInfo);
-    } else if(now.hour === ocTime.hour){
-      if(now.minute >= ocTime.minute){
-        this.sendReminder(user, dbInfo);
-      }
-    }
-  },
-  sendReminder: async (user, dbInfo) => {
-    const dm = await user.createDM();
-
-    await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
-    let res = await db.updateDMTime(user.id, new Date());
-    if(res === null){
-      console.error('Error occured logging updated time');
-      await dm.send('There was issue trying to updating: `the time`. Let Alex, or one of the bot masters know of this issue ASAP');
-    }
-    return;
-  }
 };
