@@ -25,6 +25,15 @@ client.connect(() => {
  */
 
 module.exports = {
+  // Returns the mongodb cursor
+  findAll: async function() {
+    try{
+      return await col.find({})
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  },
   // Look of the discord user's unqiue id in the database.
   findUser: async function(id) {
     try{
