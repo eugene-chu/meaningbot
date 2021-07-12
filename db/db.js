@@ -19,7 +19,7 @@ client.connect(() => {
  * userId: The user's discord uuid. For easy search
  * commit: The commitment message the user intend to have the bot keep and send reminder DM of
  * remindMe: The frequency on how often the user sends the reminder DMs. Can either be 'never', 'daily', 'weekly', or 'monthly'
- * commitTime: The time when the bot received the first .commit command or .remindMe command.
+ * remindMeTime: The internal clock to track when to DM the user the reminder. Tries to DM them as close to this time as possible. Mainly reflects when .remindMe command is used.
  * lastDMTime: The last time the bot DM messaged the user
  * status: The last known status of the user. Either 'offline' or 'online' ('online' includes 'dnd' and 'idle');
  */
@@ -44,11 +44,10 @@ module.exports = {
     }
   },
   // Add a new commitment to the database.
-  newCommit: async function(id, commit, time, status) {
+  newCommit: async function(id, commit, status) {
     /** Param should be the following:
      *    userId: <user id, using their discord's unique id>
      *    commit: <commitment message>
-     *    time: <the time (JS Date object) when the commit command was run>
      *    status: <The user's status when the commitment is created>
      * 
      * Working on allowing for more than 1 commit message
@@ -58,8 +57,8 @@ module.exports = {
         'userId': id,
         'commit': commit,
         'remindMe': 'never',
-        'commitTime': time,
-        'lastDMTime': time,
+        'remindMeTime': null,
+        'lastDMTime': null,
         'status': status });
     } catch (err){
       console.error(err);
@@ -67,15 +66,16 @@ module.exports = {
     }
   },
   // Update a commitment message
-  updateCommit: async function(id, commit){
+  updateCommit: async function(id, commit, time){
     /** Params should be the following:
      *    id: <user id, using their discord's unique id>
      *    commit: <commitment message>
+     *    time: <the time when the update command is ran>
      * commit2-5 is under-development
      */
     try{
       return await col.updateOne({'userId': id},
-      { $set: { 'commit': commit } });
+      { $set: { 'commit': commit, 'lastDMTime': time } });
     } catch (err){
       console.error(err);
       return null;
@@ -90,7 +90,7 @@ module.exports = {
      */
     try{
         return await col.updateOne({ 'userId': id },
-        { $set: { 'remindMe': frequency, 'commitTime': time, 'lastDMTime': time }});
+        { $set: { 'remindMe': frequency, 'remindMeTime': time, 'lastDMTime': time }});
     } catch (err){
       console.error(err);
       return null;
