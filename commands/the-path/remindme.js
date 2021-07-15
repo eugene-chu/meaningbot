@@ -29,8 +29,8 @@ module.exports = class RemindMe extends Command {
     let res = await db.updateRemindMe(message.author.id, frequency, new Date());
     if(res === null) return await message.reply('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
     const resMessage = ((frequency === 'never')
-    ? `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start is up again with \`.remindme\``
-    : `You will get ${frequency} DM reminding you to get after it!`);
+    ? `You will stop getting DM reminders. However, Meaningbot will still keep your commitments logged. Start it up again with \`.remindme\``
+    : `You will get ${frequency} DMs reminding you to get after it!`);
     return await message.reply(resMessage);
   }
 }
