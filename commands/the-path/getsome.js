@@ -50,7 +50,7 @@ module.exports = class GetSome extends Command {
       'When you arise in the morning, think of what a precious privilege it is to be alive. :jbp1:',
       'Execute every action in life as if it were the last. :jbp6:',
       'Because a thing seems difficult for you, do not think it impossible for anyone to accomplish. :getafterit:'
-    ]
+    ];
   }
 
   async run(message){

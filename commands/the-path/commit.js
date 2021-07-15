@@ -34,7 +34,7 @@ module.exports = class Commit extends Command{
       'The average is the borderline that keeps mere men in their place. Those who step over the line are heroes by the very act. Go! :jbp1:',
       'Scar tissue is stronger than regular tissue. Realize the strength, move on. :getafterit:',
       'Begin - to begin is half the work, let half still remain; again begin this, and you will have finished. :getafterit:'
-    ]
+    ];
   }
 
   async run(message, { text }){
