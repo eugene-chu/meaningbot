@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const db = require('../../db/db.js');
 
-module.exports = class viewcommitment extends Command{
+module.exports = class ViewCommitment extends Command{
   constructor(client){
     super(client, {
       name: 'viewcommitment',
