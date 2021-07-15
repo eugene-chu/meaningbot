@@ -33,9 +33,13 @@ module.exports = {
     const i = lastReminderTime.until(now);
 
     let IntervalOK = false;
-    if(dbInfo.remindMe === 'daily' && i.length('days') >= 1){
+    if(dbInfo.remindMe === 'daily' && i.length('hours') >= 24){
+      IntervalOK = true;
+    } else if(db.dbInfo.remindMe === 'semiweekly' && i.length('days') >= 3){
       IntervalOK = true;
     } else if(dbInfo.remindMe === 'weekly' && i.length('days') >= 7){
+      IntervalOK = true;
+    } else if(dbInfo.remindMe === 'biweekly' && i.length('days') >= 14){
       IntervalOK = true;
     } else if(dbInfo.remindMe === 'monthly' && i.length('months') >= 1){
       IntervalOK = true;

@@ -15,14 +15,20 @@ module.exports = class Commit extends Command{
         type: 'string'
       }]
     });
+
+    this.responselist = [
+      'Noted! Now get after it! :getafterit:',
+      'Thanks, and good luck on The Path! :getafterit:',
+      'Commitments are the first step, stick to The Path! :getafterit:'
+    ]
   }
 
   async run(message, { text }){
     let isThere = await db.findUser(message.author.id);
-    if(isThere) return await message.direct('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
+    if(isThere) return await message.reply('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
 
-    let res = await db.newCommit(message.author.id, text, message.author.presence.status);
-    if(res === null) return await message.direct('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
-    return await message.direct(`${text} has been committed. Now use \`.remindme\` in #the-path to set the reminder.\nIf you need help, type \`.help <command>\` for more details.`);
+    let res = await db.newCommit(message.author.id, text, message.author.presence.status, new Date());
+    if(res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
+    return await message.reply(`${text} has been committed. Now use \`.remindme\` in #the-path to set the reminder.\nIf you need help, type \`.help <command>\` for more details.`);
   }
 };
