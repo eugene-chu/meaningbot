@@ -44,7 +44,7 @@ module.exports = {
     }
   },
   // Add a new commitment to the database.
-  newCommit: async function(id, commit, status) {
+  newCommit: async function(id, commit, status, time) {
     /** Param should be the following:
      *    userId: <user id, using their discord's unique id>
      *    commit: <commitment message>
@@ -56,9 +56,9 @@ module.exports = {
       return await col.insertOne({
         'userId': id,
         'commit': commit,
-        'remindMe': 'never',
-        'remindMeTime': null,
-        'lastDMTime': null,
+        'remindMe': 'semiweekly',
+        'remindMeTime': time,
+        'lastDMTime': time,
         'status': status });
     } catch (err){
       console.error(err);
