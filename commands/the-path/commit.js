@@ -25,10 +25,10 @@ module.exports = class Commit extends Command{
 
   async run(message, { text }){
     let isThere = await db.findUser(message.author.id);
-    if(isThere) return await message.say('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
+    if(isThere) return await message.reply('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
 
     let res = await db.newCommit(message.author.id, text, message.author.presence.status, new Date());
-    if(res === null) return await message.say('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
-    return await message.say(`${text} has been committed. Now use \`.remindme\` in #the-path to set the reminder.\nIf you need help, type \`.help <command>\` for more details.`);
+    if(res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
+    return await message.reply(`${text} has been committed. Now use \`.remindme\` in #the-path to set the reminder.\nIf you need help, type \`.help <command>\` for more details.`);
   }
 };
