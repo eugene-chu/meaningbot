@@ -54,7 +54,7 @@ module.exports = class GetSome extends Command {
   }
 
   async run(message){
-    let randQuote = this.quoteslist[Math.floor(Math.random()*this.quotesList.length)];
+    let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
     return await message.say(randQuote);
   }
 }
