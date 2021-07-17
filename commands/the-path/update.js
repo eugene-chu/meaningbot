@@ -38,7 +38,7 @@ module.exports = class Update extends Command {
   }
 
   async run(message, { text }){
-    let randQuote = this.quoteslist[Math.floor(Math.random()*this.quoteslist.length)];
+    let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
 
     let isThere = await db.findUser(message.author.id);
     if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');

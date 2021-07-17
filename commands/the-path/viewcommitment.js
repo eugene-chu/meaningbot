@@ -8,9 +8,9 @@ module.exports = class ViewCommitment extends Command{
       group: 'the-path',
       memberName: 'viewcommitment',
       description: 'Reads out your current commitments back to you.',
-      example: ['`.commitments` Your current commitments are: ```Do 100 push-ups```',
-                '`.commitments` Your current commitments are: ```Clean up your room```',
-                '`.commitments` Your current commitments are: ```Become #1 lobster```']
+      example: ['`.viewcommitment` Your current commitment is: "Do 100 push-ups"\nAnd you will get a DM reminder this often: never',
+                '`.viewcommitment` Your current commitment is: "Clean up your room"\nAnd you will get a DM reminder this often: weekly',
+                '`.viewcommitment` Your current commitment is: "Become #1 lobster"\nAnd you will get a DM reminder this often: daily']
     });
   }
 
