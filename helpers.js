@@ -6,19 +6,19 @@ checkTime = async (now, dbInfo, client) => {
   const rmTime = DateTime.fromJSDate(dbInfo.remindMeTime);
   
   if(now.hour > rmTime.hour){
-    await this.sendReminder(client, dbInfo);
+    await sendReminder(client, dbInfo);
   } else if(now.hour === rmTime.hour){
     if(now.minute >= rmTime.minute){
-      await this.sendReminder(client, dbInfo);
+      await sendReminder(client, dbInfo);
     }
   }
 }
 
 sendReminder = async (client, dbInfo) => {
-  const dm = await client.users.cache.get(dbInfor.userId).createDM();
+  const dm = await client.users.cache.get(dbInfo.userId).createDM();
 
   await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
-  let res = await db.updateDMTime(user.id, new Date());
+  let res = await db.updateDMTime(dbInfo.id, new Date());
   if(res === null){
     console.error('Error occured logging updated time');
     await dm.send('There was issue trying to updating: `the time`. Let Alex, or one of the bot masters know of this issue ASAP');
@@ -46,7 +46,7 @@ module.exports = {
     }
 
     if(IntervalOK){
-      return await this.checkTime(now, dbInfo, client);
+      return await checkTime(now, dbInfo, client);
     } return;
   },
 };
