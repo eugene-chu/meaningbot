@@ -7,7 +7,7 @@ module.exports = class GetSome extends Command {
       group: 'the-path',
       memberName: 'getsome',
       description: 'Get a random G E T A F T E R I T message to pump you up so you can get after it!',
-      examples: ['`.getsome`: GET AFTER IT']
+      examples: ['`!getsome`: GET AFTER IT']
     });
 
     this.quotesList = [

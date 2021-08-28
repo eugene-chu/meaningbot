@@ -8,7 +8,7 @@ module.exports = class Commit extends Command{
       group: 'the-path',
       memberName: 'commit',
       description: 'Set your first commitment log to start your journey down the path!',
-      example: ['`.commit Do 100 push-ups`', '`.commit Get after it everyday!`'],
+      example: ['`!commit Do 100 push-ups`', '`!commit Get after it everyday!`'],
       args: [{
         key: 'text',
         prompt: 'What are you commiting to?',
