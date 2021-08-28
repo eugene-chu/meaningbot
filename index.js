@@ -6,7 +6,7 @@ const db = require('./db/db.js');
 const { checkInterval } = require('./helpers.js');
 
 const client = new CommandoClient({
-	commandPrefix: '.',
+	commandPrefix: '!',
 	owner: ['184136353812840449','294705970511085570','379336215205380106','456947461714345984']
 });
 

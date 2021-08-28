@@ -1,27 +1,14 @@
 const db = require('./db/db.js');
 const { DateTime } = require('luxon');
 
-
-checkTime = async (now, dbInfo, client) => {
-  const rmTime = DateTime.fromJSDate(dbInfo.remindMeTime);
-  
-  if(now.hour > rmTime.hour){
-    await sendReminder(client, dbInfo);
-  } else if(now.hour === rmTime.hour){
-    if(now.minute >= rmTime.minute){
-      await sendReminder(client, dbInfo);
-    }
-  }
-}
-
-sendReminder = async (client, dbInfo) => {
+sendReminder = async (dbInfo, client) => {
   const dm = await client.users.cache.get(dbInfo.userId).createDM();
 
   await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
   let res = await db.updateDMTime(dbInfo.id, new Date());
   if(res === null){
     console.error('Error occured logging updated time');
-    await dm.send('There was issue trying to updating: `the time`. Let Alex, or one of the bot masters know of this issue ASAP');
+    await dm.send('There was issue trying to updating: `the time`. Let one of the bot masters know of this issue ASAP');
   }
   return;
 }
@@ -29,7 +16,9 @@ sendReminder = async (client, dbInfo) => {
 module.exports = {
   checkInterval: async (dbInfo, client) => {
     const now = DateTime.now();
-    const lastReminderTime = DateTime.fromJSDate(dbInfo.lastDMTime);
+    const ogReminderTime = DateTime.fromJSDate(dbInfo.remindMeTime)
+    const lastReminderTime = DateTime.fromJSDate(dbInfo.lastDMTime).set({ hour: ogReminderTime.hour, minute: ogReminderTime.minute });
+
     const i = lastReminderTime.until(now);
 
     let IntervalOK = false;
@@ -46,7 +35,7 @@ module.exports = {
     }
 
     if(IntervalOK){
-      return await checkTime(now, dbInfo, client);
+      return await sendReminder(dbInfo, client);
     } return;
   },
 };

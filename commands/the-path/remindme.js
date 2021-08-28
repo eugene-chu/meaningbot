@@ -8,9 +8,9 @@ module.exports = class RemindMe extends Command {
       group: 'the-path',
       memberName: 'remindme',
       description: 'Set a reminder interval. Meaningbot will DM you, reminding you to get after it!',
-      examples: ['`.remindme daily`: Gets a DM daily to remind you to get after it!',
-                 '`.remindme weekly`: Get a DM weekly to remind you to get after it!',
-                 '`.remindme never`: Stop getting DM reminders. But Meaningbot will still have your current commitments.'],
+      examples: ['`!remindme daily`: Gets a DM daily to remind you to get after it!',
+                 '`!remindme weekly`: Get a DM weekly to remind you to get after it!',
+                 '`!remindme never`: Stop getting DM reminders. But Meaningbot will still have your current commitments.'],
       args: [{
         key: 'frequency',
         prompt: 'How often do you want to be reminded?',

@@ -8,7 +8,7 @@ module.exports = class Update extends Command {
       group: 'the-path',
       memberName: 'update',
       description: 'Update your commentmet logs',
-      examples: ['`.update Become the #1 lobster`: Commitment update from `Standup straight with shoulders back` to `Become the #1 lobster`'],
+      examples: ['`!update Become the #1 lobster`: Commitment update from\n"Standup straight with shoulders back"\nto\n"Become the #1 lobster"'],
       args: [{
         key: 'text',
         prompt: 'What is your updated commitment?',
@@ -45,6 +45,6 @@ module.exports = class Update extends Command {
 
     let res = await db.updateCommit(message.author.id, text, new Date());
     if(res === null) return await message.reply('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
-    return await message.reply(`${randQuote} \n Your commitment has been updated! Commitment changed from ${isThere.commit} to ${text}`);
+    return await message.reply(`${randQuote} \n Your commitment has been updated! Commitment changed from \n"${isThere.commit}"\nto\n"${text}"`);
   }
 };
