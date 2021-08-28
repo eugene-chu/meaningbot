@@ -24,7 +24,7 @@ module.exports = {
     let IntervalOK = false;
     if(dbInfo.remindMe === 'daily' && i.length('hours') >= 24){
       IntervalOK = true;
-    } else if(db.dbInfo.remindMe === 'semiweekly' && i.length('days') >= 3){
+    } else if(dbInfo.remindMe === 'semiweekly' && i.length('days') >= 3){
       IntervalOK = true;
     } else if(dbInfo.remindMe === 'weekly' && i.length('days') >= 7){
       IntervalOK = true;
