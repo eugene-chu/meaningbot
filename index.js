@@ -39,11 +39,21 @@ client.dispatcher.addInhibitor((message) => {
   client.on('presenceUpdate', async (oldStatus, newStatus) => {
     const isThere = await db.findUser(newStatus.userID);
     if(isThere){
-      if(typeof oldStatus === 'undefined' || oldStatus.status === 'offline'){
-        await db.updateStatus(newStatus.userID, 'online');
+      if(typeof oldStatus === 'undefined' || oldStatus.status === 'offline') {
+        try {
+          await db.updateStatus(newStatus.userID, 'online');
+        } catch (err) {
+          console.error(`There was an error trying to update the user's status.\nThe error was: ${err}`);
+        }
+
         if(isThere.remindMe !== 'never') await checkInterval(isThere, client);
-      } else if (newStatus.status === 'offline'){
-        await db.updateStatus(newStatus.userID, newStatus.status);
+
+      } else if (newStatus.status === 'offline') {
+        try {
+          await db.updateStatus(newStatus.userID, newStatus.status);
+        } catch (err) {
+          console.error(`There was an error trying to update the uesr's status.\nThe error was: ${err}`);
+        }
       }
     }
   });
