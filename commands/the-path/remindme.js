@@ -22,7 +22,7 @@ module.exports = class RemindMe extends Command {
 
   async run(message, { frequency }){
     let isThere = await db.findUser(message.author.id);
-    if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
+    if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `!commit` to add your first commitment!');
 
     if(frequency === isThere.remindMe) return await message.direct(`Your RemindMe is already set to ${frequency}. Did you mean to change it to one of the other options?`);
 

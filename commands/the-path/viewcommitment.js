@@ -16,7 +16,7 @@ module.exports = class ViewCommitment extends Command{
 
   async run(message){
     let isThere = await db.findUser(message.author.id);
-    if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `.commit` to add your first commitment!');
+    if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `!commit` to add your first commitment!');
     
     return await message.reply(`Your current commitment is:\n"${isThere.commit}"\nAnd you will get a DM reminder this often: ${isThere.remindMe}`);
   }
