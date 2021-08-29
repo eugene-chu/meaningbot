@@ -41,10 +41,10 @@ module.exports = class Commit extends Command{
     let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
 
     let isThere = await db.findUser(message.author.id);
-    if(isThere) return await message.reply('You already have a commitment.\nDid you mean to update it? Use `.update` to update your current commitment.\nYou can see your current commitments with the command `.commitments`.');
+    if(isThere) return await message.reply('You already have a commitment.\nDid you mean to update it? Use `!update` to update your current commitment.\nYou can see your current commitments with the command `!viewcommitment`.');
 
     let res = await db.newCommit(message.author.id, text, message.author.presence.status, new Date());
     if(res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
-    return await message.reply(`${randQuote} \n ${text} has been committed. Now use \`.remindme\` in #the-path to set the reminder.\nIf you need help, type \`.help <command>\` for more details.`);
+    return await message.reply(`${randQuote} \n ${text} has been committed. Now use \`!remindme\` in #the-path to set the reminder.\nIf you need help, type \`!help <command>\` for more details.`);
   }
 };
