@@ -5,7 +5,7 @@ sendReminder = async (dbInfo, client) => {
   const dm = await client.users.cache.get(dbInfo.userId).createDM();
 
   await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
-  let res = await db.updateDMTime(dbInfo.id, new Date());
+  let res = await db.updateDMTime(dbInfo.userId, new Date());
   if(res === null){
     console.error('Error occured logging updated time');
     await dm.send('There was issue trying to updating: `the time`. Let one of the bot masters know of this issue ASAP');
