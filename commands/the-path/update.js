@@ -17,23 +17,23 @@ module.exports = class Update extends Command {
     });
 
     this.quotesList = [
-      'Confront the Dragon, Get the Gold, Share it with the Community :jbp1:',
-      'Thanks for the update! :getafterit:',
-      'Get Some! :getafterit:',
-      'You bad motherfuckers! :akira_happy:',
-      'Keep the updates coming, accountability is key to sustained success! :meaningwave:',
-      'Beauty will save the world! :akira_happy:',
-      'P R O U D   O F   Y O U :akira_happy',
-      'R E A L S H I T :akira_happy:',
-      'Make it Beautiful! :akira_happy:',
-      'It\'s a beautiful day to be alive! :akira_happy:',
-      'THANK :akira_happy: YOU!',
-      'The purpose of life is finding the largest burden that you can bear and bearing it. :getafterit: :meaningwave:',
-      'Let\'s go champ! :getafterit:',
-      'Sometimes the truth hurts, and sometimes it feels real good. :jbp6:',
-      'My steps are resolute, and now the Earth shakes. :jbp6:',
-      'I like spending time with healthy people whose brains are turned on, :jbp6:',
-      'Each day provides it\'s own gifts. :faye:'
+      'Confront the Dragon, Get the Gold, Share it with the Community <:jbp1:460235087192129539>',
+      'Thanks for the update! <:getafterit:479505436282847257>',
+      'Get Some! <:getafterit:479505436282847257>',
+      'You bad motherfuckers! <:akira_happy:465667255087136799>',
+      'Keep the updates coming, accountability is key to sustained success! <:meaningwave:460233509265604638>',
+      'Beauty will save the world! <:akira_happy:465667255087136799>',
+      'P R O U D   O F   Y O U <:akira_happy:465667255087136799>',
+      'R E A L S H I T <:akira_happy:465667255087136799>',
+      'Make it Beautiful! <:akira_happy:465667255087136799>',
+      'It\'s a beautiful day to be alive! <:akira_happy:465667255087136799>',
+      'THANK <:akira_happy:465667255087136799> YOU!',
+      'The purpose of life is finding the largest burden that you can bear and bearing it. <:getafterit:479505436282847257> <:meaningwave:460233509265604638>',
+      'Let\'s go champ! <:getafterit:479505436282847257>',
+      'Sometimes the truth hurts, and sometimes it feels real good. <:jbp6:460235086986608640>',
+      'My steps are resolute, and now the Earth shakes. <:jbp6:460235086986608640>',
+      'I like spending time with healthy people whose brains are turned on, <:jbp6:460235086986608640>',
+      'Each day provides it\'s own gifts. <:faye:460235086894333962>'
     ];
   }
 
