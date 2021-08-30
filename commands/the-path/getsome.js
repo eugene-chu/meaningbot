@@ -50,8 +50,13 @@ module.exports = class GetSome extends Command {
       'When you arise in the morning, think of what a precious privilege it is to be alive. <:jbp1:460235087192129539>',
       'Execute every action in life as if it were the last. <:jbp6:460235086986608640>',
       'Because a thing seems difficult for you, do not think it impossible for anyone to accomplish. <:getafterit:479505436282847257>',
-      'Make it B E A U T I F U L <:jbpAesthetic:822805626715504711>',
-      'I T \' S  A  G R E A T  D A Y ! ! !  W O O <:meaningwave:460233509265604638>'
+      'M A K E  I T  B E A U T I F U L <:jbpAesthetic:822805626715504711>',
+      'I T \' S  A  G R E A T  D A Y ! ! !  W O O <:meaningwave:460233509265604638>',
+      'Everything is a scam! If you want to play the game, just go play it. <:meaningwave:460233509265604638>',
+      'Do things that are delightful to you <:wattsWave3:460234157415596043>',
+      'Listen kids, things aren\'t what they seem. Don\' be fooled. <:wattsWave3:460234157415596043>',
+      'It feels like it works',
+      'G E T  T H A T <:GOOD:823909041176707083> F E E L I N G ! ! !'
     ];
   }
 
