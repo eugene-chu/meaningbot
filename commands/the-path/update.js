@@ -40,11 +40,6 @@ module.exports = class Update extends Command {
   async run(message, { text }){
     let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
 
-    let isThere = await db.findUser(message.author.id);
-    if(!isThere) return await message.reply('You have not created a commitment yet.\nUse `!commit` to add your first commitment!');
-
-    let res = await db.updateCommit(message.author.id, text, new Date());
-    if(res === null) return await message.reply('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
-    return await message.reply(`${randQuote} \n Your commitment has been updated! Commitment changed from \n"${isThere.commit}"\nto\n"${text}"`);
+    return await message.reply(randQuote);
   }
 };
