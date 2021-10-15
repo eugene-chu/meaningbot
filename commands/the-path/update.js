@@ -39,6 +39,7 @@ module.exports = class Update extends Command {
       'Action is the next step to realize your goals. <:akira_happy:465667255087136799>',
       'Execute every action in life as if it were the last. <:jbp6:460235086986608640>',
       'It feels like it works',
+      'Remember that what you do not yet know, is more important than what you already know. <:2_jbpAesthetic:822805626715504711>'
     ];
   }
 

@@ -56,7 +56,8 @@ module.exports = class GetSome extends Command {
       'Do things that are delightful to you <:wattsWave3:460234157415596043>',
       'Listen kids, things aren\'t what they seem. Don\' be fooled. <:wattsWave3:460234157415596043>',
       'It feels like it works',
-      'G E T  T H A T <:GOOD:823909041176707083> F E E L I N G ! ! !'
+      'G E T  T H A T <:GOOD:823909041176707083> F E E L I N G ! ! !',
+      'Remember that what you do not yet know, is more important than what you already know. <:2_jbpAesthetic:822805626715504711>'
     ];
   }
 

@@ -17,9 +17,9 @@ module.exports = class Commit extends Command{
     });
 
     this.quotesList = [
-      'Noted! Now get after it! <:getafterit:479505436282847257>479505436282847257>',
-      'Thanks, and good luck on The Path! <:getafterit:479505436282847257>479505436282847257>',
-      'Commitments are the first step, stick to The Path! <:getafterit:479505436282847257>479505436282847257>',
+      'Noted! Now get after it! <:getafterit:479505436282847257>',
+      'Thanks, and good luck on The Path! <:getafterit:479505436282847257>',
+      'Commitments are the first step, stick to The Path! <:getafterit:479505436282847257>',
       'You bad motherfuckers! <:akira_happy:465667255087136799>',
       'When you do a little more than you can you get stronger, and we don\'t know the upper limit to that. <:jbp6:460235086986608640>',
       'Action is the next step to realize your goals. <:akira_happy:465667255087136799>',
@@ -33,7 +33,8 @@ module.exports = class Commit extends Command{
       'It\'ll destroy you if you try to make it mean anything to anyone but yourself. <:jbp6:460235086986608640>  ',
       'The average is the borderline that keeps mere men in their place. Those who step over the line are heroes by the very act. Go! <:jbp1:460235087192129539>  ',
       'Scar tissue is stronger than regular tissue. Realize the strength, move on. <:getafterit:479505436282847257>',
-      'Begin - to begin is half the work, let half still remain; again begin this, and you will have finished. <:getafterit:479505436282847257>'
+      'Begin - to begin is half the work, let half still remain; again begin this, and you will have finished. <:getafterit:479505436282847257>',
+      'Remember that what you do not yet know, is more important than what you already know. <:2_jbpAesthetic:822805626715504711>'
     ];
   }
 
