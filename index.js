@@ -60,9 +60,21 @@ client.dispatcher.addInhibitor((message) => {
 
   client.setInterval(async () => {
     const allCommits = await db.findAll();
+    // note this is a temp fix. if the user is not in the discord guild/channel's user list, but have a commitment (either left, or had their user id changed)
+    // we skip that user and move on to the next user
+    // Have not made a solution for this problem yet
+    // possible solution include: DMing bot master about the problem (hopefully once) and we go in and fix it
+    // or double check the server list to see if that username still exist, update the current record, and send it to that userId instead (might be a bit complicated)
+    // 
+    let haveUser = false;
     allCommits.forEach(async commitment => {
-      if(commitment.remindMe !== 'never' && commitment.status === 'online')
-        await checkInterval(commitment, client);
+      console.log(commitment.userId);
+      haveUser = await client.users.cache.has(commitment.userId);
+      console.log(haveUser);
+      if(haveUser) {
+        if(commitment.remindMe !== 'never' && commitment.status === 'online')
+          await checkInterval(commitment, client);
+      }
     });
   }, (1000 * 60));
 
