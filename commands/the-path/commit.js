@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const db = require('../../db/db.js');
 
-module.exports = class Commit extends Command{
-  constructor(client){
+module.exports = class Commit extends Command {
+  constructor(client) {
     super(client, {
       name: 'commit',
       group: 'the-path',
@@ -23,7 +23,7 @@ module.exports = class Commit extends Command{
       'You bad motherfuckers! <:akira_happy:465667255087136799>',
       'When you do a little more than you can you get stronger, and we don\'t know the upper limit to that. <:jbp6:460235086986608640>',
       'Action is the next step to realize your goals. <:akira_happy:465667255087136799>',
-      'Get creative. Get aggressive. Get it done! When you are on the road, STAY ON THE PATH <:getafterit:479505436282847257>479505436282847257>',
+      'Get creative. Get aggressive. Get it done! When you are on the road, STAY ON THE PATH <:getafterit:479505436282847257>',
       'Fear is normal. Every person feels fear at some point. Step aggressively toward to your fear - that is the step into bravery <:getafterit:479505436282847257>',
       'You have to do the work. You have to hold the line. You have to make it happen <:getafterit:479505436282847257>',
       'Don\'t count on motivation. Count on Discipline <:getafterit:479505436282847257>',
@@ -38,19 +38,19 @@ module.exports = class Commit extends Command{
     ];
   }
 
-  async run(message, { text }){
-    let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
+  async run(message, { text }) {
+    let randQuote = this.quotesList[Math.floor(Math.random() * this.quotesList.length)];
     let res;
 
     let isThere = await db.findUser(message.author.id);
-    if(isThere) {
+    if (isThere) {
       res = await db.updateCommit(message.author.id, text, new Date());
-      if(res === null) return await message.reply('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
+      if (res === null) return await message.reply('There was an error trying to update the commitment. Let Alex or one of the bot masters know!');
       return await message.reply(`${randQuote} \n Your commitment has been updated! Commitment changed from \n"${isThere.commit}"\nto\n"${text}"`);
 
     } else {
       res = await db.newCommit(message.author.id, text, message.author.presence.status, new Date());
-      if(res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
+      if (res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
       return await message.reply(`${randQuote} \n ${text} has been committed. Now use \`!remindme\` in #the-path to set the reminder.\nIf you need help, type \`!help <command>\` for more details.`);
     }
   }

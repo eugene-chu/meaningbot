@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 
 module.exports = class GetSome extends Command {
-  constructor(client){
+  constructor(client) {
     super(client, {
       name: 'getsome',
       group: 'the-path',
@@ -12,11 +12,11 @@ module.exports = class GetSome extends Command {
 
     this.quotesList = [
       'Get After It, Bucko <:jbp1:460235087192129539>',
-      'Get Some <:getafterit:479505436282847257>479505436282847257>',
+      'Get Some <:getafterit:479505436282847257>',
       'Who Gonna Carry The Boat!?! <:goggins:564992411562934286>',
       'Roger That <:goggins:564992411562934286>',
       'You gotta get after it! <:goggins:564992411562934286>',
-      'Discipline Equals Freedom! <:getafterit:479505436282847257>479505436282847257>',
+      'Discipline Equals Freedom! <:getafterit:479505436282847257>',
       'Get after it! <:getafterit:479505436282847257>',
       'Stay on  T H E   P A T H ! <:getafterit:479505436282847257>',
       'You bad motherfucker! <:akira_happy:465667255087136799>',
@@ -61,8 +61,8 @@ module.exports = class GetSome extends Command {
     ];
   }
 
-  async run(message){
-    let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
+  async run(message) {
+    let randQuote = this.quotesList[Math.floor(Math.random() * this.quotesList.length)];
     return await message.say(randQuote);
   }
 }
