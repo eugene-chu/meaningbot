@@ -2,13 +2,13 @@ const { Command } = require('discord.js-commando');
 const db = require('../../db/db.js')
 
 module.exports = class Update extends Command {
-  constructor(client){
+  constructor(client) {
     super(client, {
       name: 'update',
       group: 'the-path',
       memberName: 'update',
-      description: 'Update your commentmet logs',
-      examples: ['`!update Become the #1 lobster`: Commitment update from\n"Standup straight with shoulders back"\nto\n"Become the #1 lobster"'],
+      description: 'Update the MAZ Fam/community on your commentmet progress. Meaningbot will also be proud of your progress and tell you something motivational!\n\n Note: This will not update the commitment message Meaningbot will send you.',
+      examples: ['`!update Become the #1 lobster`: "You bad motherfuckers!"'],
       args: [{
         key: 'text',
         prompt: 'What is your updated commitment?',
@@ -43,8 +43,8 @@ module.exports = class Update extends Command {
     ];
   }
 
-  async run(message, { text }){
-    let randQuote = this.quotesList[Math.floor(Math.random()*this.quotesList.length)];
+  async run(message, { text }) {
+    let randQuote = this.quotesList[Math.floor(Math.random() * this.quotesList.length)];
 
     return await message.reply(randQuote);
   }

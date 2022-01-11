@@ -7,8 +7,10 @@ module.exports = class Commit extends Command {
       name: 'commit',
       group: 'the-path',
       memberName: 'commit',
-      description: 'Set your first commitment log to start your journey down the path!',
-      example: ['`!commit Do 100 push-ups`', '`!commit Get after it everyday!`'],
+      description: 'Set your first commitment log to start your journey down the path! If you already have a commitment, it will update it and change it!',
+      example: ['`!commit Do 100 push-ups`: Noted! Now get after it!',
+        '`!commit Get after it everyday!` Thanks, and good luck on The Path!',
+        '`!update Become the #1 lobster`: Disciple Equals Freedom\n Your commitment has been update! Commitment changed from\n"Standup straight with shoulders back"\nto\n"Become the #1 lobster"'],
       args: [{
         key: 'text',
         prompt: 'What are you commiting to?',
