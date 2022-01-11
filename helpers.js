@@ -1,15 +1,27 @@
 const db = require('./db/db.js');
 const { DateTime } = require('luxon');
+const fs = require('fs');
 
 sendReminder = async (dbInfo, client) => {
-  const dm = await client.users.cache.get(dbInfo.userId).createDM();
-
-  await dm.send(`Remember, your current commitment is:\n${dbInfo.commit}`);
-  let res = await db.updateDMTime(dbInfo.userId, new Date());
-  if(res === null){
-    console.error('Error occured logging updated time');
-    await dm.send('There was issue trying to updating: `the time`. Let one of the bot masters know of this issue ASAP');
-  }
+  // since Discord API returns everything as a promise, the entire sendReminder system has been reworked to be sent as a promise.
+  client.users.cache.get(dbInfo.userId)
+    .createDM()
+    .then((DMChannel) => {
+      DMChannel
+        .send(`Remember, your current commitment is:\n${dbInfo.commit}`)
+        .then(() => {
+          db.updateDMTime(dbInfo.userId, new Date())
+            .catch((e) => {
+              const errormsg = `There was an error, ${e}, writing for ${dbInfo.userID} because this user does not exist on the server.\n`
+              fs.writeFile('./errorOutputs/SendingErrors.txt', errormsg, err => {
+                if (err) {
+                  console.error(err);
+                  return;
+                }
+              })
+            });
+        });
+    });
   return;
 }
 
@@ -22,19 +34,19 @@ module.exports = {
     const i = lastReminderTime.until(now);
 
     let IntervalOK = false;
-    if(dbInfo.remindMe === 'daily' && i.length('hours') >= 24){
+    if (dbInfo.remindMe === 'daily' && i.length('hours') >= 24) {
       IntervalOK = true;
-    } else if(dbInfo.remindMe === 'semiweekly' && i.length('days') >= 3){
+    } else if (dbInfo.remindMe === 'semiweekly' && i.length('days') >= 3) {
       IntervalOK = true;
-    } else if(dbInfo.remindMe === 'weekly' && i.length('days') >= 7){
+    } else if (dbInfo.remindMe === 'weekly' && i.length('days') >= 7) {
       IntervalOK = true;
-    } else if(dbInfo.remindMe === 'biweekly' && i.length('days') >= 14){
+    } else if (dbInfo.remindMe === 'biweekly' && i.length('days') >= 14) {
       IntervalOK = true;
-    } else if(dbInfo.remindMe === 'monthly' && i.length('months') >= 1){
+    } else if (dbInfo.remindMe === 'monthly' && i.length('months') >= 1) {
       IntervalOK = true;
     }
 
-    if(IntervalOK){
+    if (IntervalOK) {
       return await sendReminder(dbInfo, client);
     } return;
   },
