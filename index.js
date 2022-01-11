@@ -69,9 +69,10 @@ client.setInterval(async () => {
 	// or double check the server list to see if that username still exist, update the current record, and send it to that userId instead (might be a bit complicated)
 	let haveUser = false;
 	allCommits.forEach(async commitment => {
-		console.log(commitment.userId);
+		// for testing purpose, uncomment the lines below
+		// console.log("The current user I'm checking is:", commitment.userId);
 		haveUser = await client.users.cache.has(commitment.userId);
-		console.log(haveUser);
+		// console.log("Does this User exist? ", haveUser);
 		if (haveUser) {
 			if (commitment.remindMe !== 'never' && commitment.status === 'online')
 				await checkInterval(commitment, client);
