@@ -7,8 +7,8 @@ module.exports = class Update extends Command {
       name: 'update',
       group: 'the-path',
       memberName: 'update',
-      description: 'Update the MAZ Fam/community on your commentmet progress. Meaningbot will also be proud of your progress and tell you something motivational!\n\n Note: This will not update the commitment message Meaningbot will send you.',
-      examples: ['`!update Become the #1 lobster`: "You bad motherfuckers!"'],
+      description: 'Update the MAZ Fam/community on your commentmet progress.\n\n Note: This will not update the commitment message Meaningbot will send you.',
+      examples: ['`!update Did 100 pushups today!`: P R O U D  O F  Y O U'],
       args: [{
         key: 'text',
         prompt: 'What is your updated commitment?',
