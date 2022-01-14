@@ -11,16 +11,9 @@ sendReminder = async (dbInfo, client) => {
         .send(`Remember, your current commitment is:\n${dbInfo.commit}`)
         .then(() => {
           db.updateDMTime(dbInfo.userId, new Date())
-            .catch((e) => {
-              const errormsg = `There was an error, ${e}, writing for ${dbInfo.userID} because this user does not exist on the server.\n`
-              fs.writeFile('./errorOutputs/SendingErrors.txt', errormsg, err => {
-                if (err) {
-                  console.error(err);
-                  return;
-                }
-              })
-            });
-        });
+        }).catch((e) => {
+          console.log(`Error Occur: ${e}\n With the User: ${dbInfo.userId}`);
+        })
     });
   return;
 }
@@ -47,7 +40,7 @@ module.exports = {
     }
 
     if (IntervalOK) {
-      return await sendReminder(dbInfo, client);
+      sendReminder(dbInfo, client);
     } return;
   },
 };

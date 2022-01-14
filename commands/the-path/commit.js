@@ -53,7 +53,7 @@ module.exports = class Commit extends Command {
     } else {
       res = await db.newCommit(message.author.id, text, message.author.presence.status, new Date());
       if (res === null) return await message.reply('There was an error trying to add the commitment. Let Alex or one of the bot master know!');
-      return await message.reply(`${randQuote} \n ${text} has been committed. Now use \`!remindme\` in #the-path to set the reminder.\nIf you need help, type \`!help <command>\` for more details.`);
+      return await message.reply(`${randQuote} \n ${text} has been committed. By default, the reminder is set to \`daily\`. Use \`!remindme\` if you want to set a new reminder interval.\nIf you need help, type \`!help <command>\` for more details.`);
     }
   }
 };
